@@ -1,5 +1,6 @@
 var launchPhrase = process.argv[2];
 var songSearch = process.argv[3];
+var movieSearch = process.argv[3]
 //console.log("launchPhrase = " + launchPhrase);
 
 if ((launchPhrase == 's') || (launchPhrase == 'spotify') || (launchPhrase == 'spotify-this-song'))
@@ -9,7 +10,7 @@ else
       {twitter();}
     else   
         if((launchPhrase == 'm') || (launchPhrase == 'omdb') || (launchPhrase == 'movie') || (launchPhrase == 'movie-this'))
-          {movie();}
+          {movie(movieSearch);}
         else
           {doThis();}
 
@@ -59,8 +60,59 @@ function twitter(){
   console.log("twitter works")
 }
 
-function movie(){
-  console.log("movie works")
+
+function movie(movie_name, movie_year){
+  // console.log("movie works")
+  var omdb = require('omdb');
+ 
+  // omdb.search('saw', function(err, movies) {
+  //     if(err) {
+  //         return console.error(err);
+  //     }
+   
+  //     if(movies.length < 1) {
+  //         return console.log('No movies were found!');
+  //     }
+
+  //     //add space between command and data returned
+  //     console.log("\n");
+   
+  //     movies.forEach(function(movie) {
+  //         console.log('%s (%d)', movie.title, movie.year);
+  //     });
+  // });
+   
+  omdb.get({ title: movie_name, year: movie_year }, true, function(err, movie) {
+      if(err) {
+          return console.error(err);
+      }
+   
+      if(!movie) {
+          return console.log('Movie not found!');
+      }
+
+      // console.log("\n");
+      // console.log("The movie title is: " + movie.title);
+      // console.log("The year this picture was filed in: " + movie.year);
+      // console.log("Current rating: " + movie.imdb.rating);
+      // console.log("This film was filmed in: " + movie.countries[0]);
+      // console.log("This movies language is: " + movie.language);
+
+      // //returns all actors in movie
+      // var actorsArray = [movie.actors];
+
+      // for (var i = 0; i < actorsArray.length; i++) {
+      // console.log("Actors appearing in the movie are: " + actorsArray[i] + " ");
+      // }
+
+      // console.log("\n");
+      // console.log("The Plot --- " + movie.plot);
+      // console.log("\n");
+
+
+
+      console.log(movie);
+  });
 }
 
 function doThis(){
