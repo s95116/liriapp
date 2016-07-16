@@ -1,4 +1,6 @@
 var launchPhrase = process.argv[2];
+var inquirer = require('inquirer');
+// var twitterKeys = require('./keys.js')
 
 
 //Spotify if statement if search field is left blank
@@ -81,13 +83,31 @@ function spotify(song_name){
 
 function twitter(user_id){
   var Twitter = require('twitter');
+  var twitterKeys = require('./keys.js');
  
+  twitterKeys();
+
   var client = new Twitter({
-  consumer_key: '5Tqny08y0YhbpopzFrhBijRrm',
-  consumer_secret: 'ellSEfiGUmVefHI5PjyCJ2XUaPdMSvtl42JsRXwz0qtF27EL5a',
-  access_token_key: '13608152-ZrJG0XOEIj6S0HFq9UzCth4ErYjQ04u9BeCNrDQyr',
-  access_token_secret: 'yW1ys6wy5485N49LOBf0Q5DwiLg2WgechdVhzCtmrZmVW'
-  });
+    twitterKeys.consumer_key,
+  })
+
+
+
+  // var client = twitterKeys({
+  //   twitterKeys:consumer_key,
+  //   twitterKeys:consumer_secret,
+  //   twitterKeys:access_token_key,
+  //   twitterKeys:access_token_secret
+  // });
+
+
+//THis code works
+  // var client = new Twitter({
+  // consumer_key: '5Tqny08y0YhbpopzFrhBijRrm',
+  // consumer_secret: 'ellSEfiGUmVefHI5PjyCJ2XUaPdMSvtl42JsRXwz0qtF27EL5a',
+  // access_token_key: '13608152-ZrJG0XOEIj6S0HFq9UzCth4ErYjQ04u9BeCNrDQyr',
+  // access_token_secret: 'yW1ys6wy5485N49LOBf0Q5DwiLg2WgechdVhzCtmrZmVW'
+  // });
  
   var params = {screen_name: user_id};
   client.get('statuses/user_timeline', params, function(error, tweets, response){
